@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kings Cafe — Balipur, Nagnathpur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Baloo+2:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFF8EA;
+    --paper-dark:#F5EAD2;
+    --ink:#2B2320;
+    --chili:#D64550;
+    --marigold:#F2A93B;
+    --awning:#1F6F54;
+    --mustard:#F5C242;
+    --line: rgba(43,35,32,0.15);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Baloo 2', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+  h1,h2,h3{font-family:'Alfa Slab One', cursive; font-weight:400;}
+  .mono{font-family:'Space Mono', monospace;}
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+
+  /* ===== NAV ===== */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--paper);
+    border-bottom:3px solid var(--ink);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px; max-width:1080px; margin:0 auto;
+  }
+  .brand{
+    font-family:'Alfa Slab One', cursive;
+    font-size:1.3rem;
+    color:var(--chili);
+    letter-spacing:0.5px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .brand .crown{font-size:1.1rem;}
+  .nav-links{display:flex; gap:28px; font-weight:600; font-size:0.95rem;}
+  .nav-links a{text-decoration:none; position:relative; padding:4px 0;}
+  .nav-links a:hover{color:var(--chili);}
+  .nav-links a:focus-visible, a:focus-visible{outline:2px solid var(--chili); outline-offset:3px; border-radius:2px;}
+  .call-btn{
+    background:var(--awning); color:var(--paper); font-weight:700;
+    padding:8px 16px; border-radius:6px; text-decoration:none; font-size:0.9rem;
+    border:2px solid var(--ink);
+  }
+  @media (max-width:720px){ .nav-links{display:none;} }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    padding:64px 24px 56px;
+    background:
+      radial-gradient(circle at 85% 10%, rgba(242,169,59,0.35), transparent 45%),
+      radial-gradient(circle at 8% 85%, rgba(31,111,84,0.18), transparent 40%),
+      var(--paper);
+    overflow:hidden;
+    border-bottom:3px solid var(--ink);
+  }
+  .hero-inner{max-width:1080px; margin:0 auto; position:relative;}
+  .stamp{
+    position:absolute; top:8px; right:24px;
+    width:104px; height:104px;
+    border:4px solid var(--chili);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    transform:rotate(14deg);
+    color:var(--chili);
+    font-family:'Alfa Slab One', cursive;
+    font-size:1.05rem;
+    text-align:center;
+    line-height:1.1;
+    opacity:0.92;
+  }
+  .stamp span{display:block; font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:2px; font-weight:700; margin-top:2px;}
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:var(--awning);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 7vw, 5rem);
+    color:var(--ink);
+    line-height:0.95;
+    max-width:720px;
+    text-shadow: 4px 4px 0 var(--mustard);
+  }
+  .hero-tagline{
+    margin-top:20px;
+    font-size:1.15rem;
+    max-width:520px;
+    font-weight:500;
+    color:#4a3f38;
+  }
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:12px;
+    margin-top:28px;
+  }
+  .chip{
+    display:flex; align-items:center; gap:6px;
+    background:var(--paper);
+    border:2px solid var(--ink);
+    border-radius:999px;
+    padding:8px 16px;
+    font-size:0.9rem;
+    font-weight:700;
+  }
+  .chip.open{background:var(--awning); color:var(--paper); border-color:var(--awning);}
+  .chip .dot{width:8px; height:8px; border-radius:50%; background:var(--paper); animation:pulse 1.6s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.3;}}
+  .hero-ctas{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
+  .btn{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700; font-size:1rem;
+    padding:14px 28px;
+    border-radius:8px;
+    border:3px solid var(--ink);
+    text-decoration:none;
+    cursor:pointer;
+    transition:transform 0.15s ease;
+  }
+  .btn:hover{transform:translate(-2px,-2px); box-shadow:4px 4px 0 var(--ink);}
+  .btn-primary{background:var(--chili); color:var(--paper);}
+  .btn-ghost{background:transparent; color:var(--ink);}
+
+  /* ===== INFO STRIP ===== */
+  .info-strip{
+    background:var(--ink);
+    color:var(--paper);
+    padding:14px 0;
+    overflow:hidden;
+    white-space:nowrap;
+    border-bottom:3px solid var(--ink);
+  }
+  .info-strip .track{
+    display:inline-block;
+    font-family:'Space Mono', monospace;
+    font-size:0.85rem;
+    letter-spacing:1px;
+    animation:scroll 22s linear infinite;
+  }
+  .info-strip .track span{margin:0 28px; color:var(--mustard);}
+  @keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  @media (prefers-reduced-motion: reduce){ .info-strip .track{animation:none;} }
+
+  /* ===== SECTION HEADERS ===== */
+  section{padding:64px 0;}
+  .section-head{margin-bottom:36px; max-width:640px;}
+  .section-head .eyebrow{margin-bottom:8px;}
+  .section-head h2{font-size:clamp(1.8rem,4vw,2.6rem); color:var(--ink);}
+  .section-head p{margin-top:10px; color:#5a4e46; font-size:1.02rem; font-weight:500;}
+
+  /* ===== MENU ===== */
+  .menu-nav{
+    display:flex; gap:10px; flex-wrap:wrap; margin-bottom:32px;
+  }
+  .menu-nav button{
+    font-family:'Space Mono', monospace;
+    font-size:0.8rem; font-weight:700;
+    padding:8px 14px;
+    border-radius:6px;
+    border:2px solid var(--ink);
+    background:var(--paper);
+    cursor:pointer;
+  }
+  .menu-nav button.active, .menu-nav button:hover{
+    background:var(--ink); color:var(--paper);
+  }
+  .menu-category{margin-bottom:44px;}
+  .menu-category h3{
+    font-size:1.4rem; color:var(--chili);
+    display:flex; align-items:center; gap:12px;
+    margin-bottom:18px;
+  }
+  .menu-category h3::after{
+    content:''; flex:1; height:3px;
+    background:repeating-linear-gradient(90deg, var(--ink) 0 8px, transparent 8px 14px);
+    opacity:0.4;
+  }
+  .dish-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));
+    gap:16px;
+  }
+  .dish-ticket{
+    position:relative;
+    background:var(--paper-dark);
+    border:2px dashed var(--ink);
+    border-radius:4px;
+    padding:16px 16px 14px;
+    display:flex; justify-content:space-between; align-items:flex-start; gap:10px;
+  }
+  .dish-ticket::before, .dish-ticket::after{
+    content:''; position:absolute; width:14px; height:14px;
+    background:var(--paper); border-radius:50%;
+    top:50%; transform:translateY(-50%);
+  }
+  .dish-ticket::before{left:-8px;}
+  .dish-ticket::after{right:-8px;}
+  .dish-name{font-weight:700; font-size:0.98rem; line-height:1.3;}
+  .dish-price{
+    font-family:'Space Mono', monospace;
+    font-size:0.85rem; font-weight:700;
+    color:var(--awning);
+    white-space:nowrap;
+  }
+  .dish-price.tbd{color:#8a7d72; font-size:0.72rem;}
+
+  /* ===== POPULAR TIMES ===== */
+  .popular-panel{
+    background:var(--paper-dark);
+    border:3px solid var(--ink);
+    border-radius:12px;
+    padding:28px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+  }
+  @media (max-width:640px){ .popular-panel{grid-template-columns:1fr;} }
+  .days{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:18px;}
+  .day-pill{
+    font-family:'Space Mono',monospace; font-size:0.72rem; font-weight:700;
+    padding:6px 10px; border-radius:5px; border:2px solid var(--ink);
+    background:var(--paper);
+  }
+  .day-pill.today{background:var(--chili); color:var(--paper); border-color:var(--chili);}
+  .stat-line{display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--line); font-weight:600; font-size:0.92rem;}
+  .stat-line:last-child{border-bottom:none;}
+  .stat-line b{font-family:'Space Mono',monospace; color:var(--chili);}
+  .bars{display:flex; align-items:flex-end; gap:6px; height:120px;}
+  .bar{
+    flex:1; background:var(--awning); border-radius:3px 3px 0 0;
+    position:relative;
+  }
+  .bar.peak{background:var(--chili);}
+  .bar-labels{display:flex; gap:6px; margin-top:6px;}
+  .bar-labels span{flex:1; text-align:center; font-family:'Space Mono',monospace; font-size:0.62rem; color:#6b5f56;}
+
+  /* ===== REVIEWS ===== */
+  .rating-block{
+    display:flex; align-items:center; gap:28px; flex-wrap:wrap;
+    background:var(--ink); color:var(--paper);
+    border-radius:12px; padding:32px;
+  }
+  .rating-num{font-family:'Alfa Slab One',cursive; font-size:4rem; color:var(--mustard); line-height:1;}
+  .stars{color:var(--mustard); font-size:1.3rem; letter-spacing:2px;}
+  .rating-sub{font-family:'Space Mono',monospace; font-size:0.85rem; opacity:0.85; margin-top:6px;}
+  .rating-note{max-width:340px; font-size:0.95rem; font-weight:500; opacity:0.9;}
+
+  /* ===== FOOTER ===== */
+  footer{
+    background:var(--awning);
+    color:var(--paper);
+    padding:48px 0 28px;
+    border-top:3px solid var(--ink);
+  }
+  .footer-grid{
+    display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:32px;
+  }
+  @media (max-width:720px){ .footer-grid{grid-template-columns:1fr;} }
+  footer h4{font-family:'Space Mono',monospace; font-size:0.78rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; color:var(--mustard);}
+  footer .brand-foot{font-family:'Alfa Slab One',cursive; font-size:1.6rem; margin-bottom:10px;}
+  footer p, footer li{font-size:0.92rem; line-height:1.6; opacity:0.95;}
+  footer ul{list-style:none;}
+  footer a{text-decoration:none;}
+  footer a:hover{color:var(--mustard);}
+  .foot-bottom{
+    margin-top:36px; padding-top:20px; border-top:1px solid rgba(255,248,234,0.25);
+    font-family:'Space Mono',monospace; font-size:0.75rem; opacity:0.75;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand"><span class="crown">♛</span> Kings Cafe</div>
+    <div class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#popular-times">Popular Times</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#visit">Visit</a>
+    </div>
+    <a class="call-btn" href="tel:9336008432">Call to order</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="stamp">OPEN<span>TODAY</span></div>
+    <div class="eyebrow">Balipur · Nagnathpur · Uttar Pradesh</div>
+    <h1>Kings<br>Cafe</h1>
+    <p class="hero-tagline">Coffee, shakes, cheesy pizzas and street-side pani puri — the corner spot in Balipur where ₹200–400 gets the whole table fed.</p>
+    <div class="hero-meta">
+      <div class="chip open"><span class="dot"></span> Open · Closes 10 PM Tue</div>
+      <div class="chip">★ 4.6 (14 reviews)</div>
+      <div class="chip">₹200–400 per person</div>
+    </div>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#menu">View the menu</a>
+      <a class="btn btn-ghost" href="#visit">Get directions</a>
+    </div>
+  </div>
+</header>
+
+<div class="info-strip">
+  <div class="track">
+    <span>★ 4.6 RATING</span><span>COFFEE · SHAKES · PIZZA · BURGER · NOODLES · PANI PURI</span><span>OPEN TODAY</span><span>CALL 9336008432</span>
+    <span>★ 4.6 RATING</span><span>COFFEE · SHAKES · PIZZA · BURGER · NOODLES · PANI PURI</span><span>OPEN TODAY</span><span>CALL 9336008432</span>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- MENU -->
+  <section id="menu">
+    <div class="section-head">
+      <div class="eyebrow">The Board</div>
+      <h2>What's cooking</h2>
+      <p>Nine sections, one griddle. Everything's made fresh to order — ask the counter for today's prices on anything not marked.</p>
+    </div>
+
+    <div class="menu-nav" id="menuNav"></div>
+    <div id="menuContent"></div>
+  </section>
+
+  <!-- POPULAR TIMES -->
+  <section id="popular-times">
+    <div class="section-head">
+      <div class="eyebrow">Plan your visit</div>
+      <h2>When it fills up</h2>
+    </div>
+    <div class="popular-panel">
+      <div>
+        <div class="days" id="dayPills"></div>
+        <div class="stat-line"><span>Right now</span><b>Usually not too busy</b></div>
+        <div class="stat-line"><span>Typical visit length</span><b>~10 min</b></div>
+        <div class="stat-line"><span>Best for</span><b>Quick bite &amp; takeaway</b></div>
+      </div>
+      <div>
+        <div class="bars" id="barsChart"></div>
+        <div class="bar-labels">
+          <span>9a</span><span>11a</span><span>1p</span><span>3p</span><span>5p</span><span>7p</span><span>9p</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews">
+    <div class="section-head">
+      <div class="eyebrow">Word on the street</div>
+      <h2>Rated by the regulars</h2>
+    </div>
+    <div class="rating-block">
+      <div>
+        <div class="rating-num">4.6</div>
+        <div class="stars">★★★★★</div>
+        <div class="rating-sub">based on 14 Google reviews</div>
+      </div>
+      <div class="rating-note">A neighbourhood favourite for quick coffee runs, shake breaks and evening snacks — see the full reviews and photos on Google.</div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER / VISIT -->
+<footer id="visit">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="brand-foot">♛ Kings Cafe</div>
+        <p>Balipur, Nagnathpur<br>Uttar Pradesh 221508</p>
+        <p style="margin-top:12px;">₹200–400 per person · Cafe</p>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <p>Open daily<br>Closes 10 PM</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:9336008432">9336008432</a></li>
+          <li style="margin-top:8px;"><a href="#menu">See full menu</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>KINGS CAFE — BALIPUR, NAGNATHPUR</span>
+      <span>MADE FRESH, SERVED FAST</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menu = {
+    "Coffee": [
+      ["Hot Coffee", null], ["Cold Coffee", null], ["Hot Boost", null], ["Cold Boost Harlisk", null]
+    ],
+    "Shake": [
+      ["Banana Shake", null], ["Mango Shake", null], ["Oreo Shake", null], ["Chocolate Shake", null], ["Kit Kat Shake", null]
+    ],
+    "Noodles": [
+      ["Chowmein", null], ["Pasta", null], ["Finger Chips", null], ["Manchurian Gravy", null], ["Chilli Paneer Gravy", null], ["Chilli Potato", null]
+    ],
+    "Fried Rice": [
+      ["Veg Fried Rice", null], ["Manchurian Rice", null], ["Paneer Fried Rice", null], ["Mushroom Fried Rice", null]
+    ],
+    "Bread": [
+      ["Paneer Pakora", null]
+    ],
+    "Pizza": [
+      ["Cheese Pizza", null], ["Veg Cheese Pizza", null], ["Sweet Corn Pizza", null], ["Paneer Pizza", null], ["Tandoori Sauce Pizza", null], ["All Variety Pizza", null]
+    ],
+    "Burger": [
+      ["Regular Burger", null], ["Paneer Burger", null], ["Cheese Burger", null], ["Pav Bhaji", null]
+    ],
+    "Sandwich": [
+      ["Veg Sandwich", null], ["Veg Cheese Sandwich", null], ["Grilled Cheese Sandwich", "₹50"], ["Paneer Sandwich", null],
+      ["Corn Sandwich", null], ["Open Cheese Toast", null], ["Potato Cheese Grill Sandwich", null],
+      ["Schezwan Cheese Sandwich", null], ["Mayonnaise Grill Sandwich", null]
+    ],
+    "Pani Puri": [
+      ["Cheese Puri — 8 pc", null], ["Mayonnaise Puri — 8 pc", null], ["Sev Puri — 8 pc", null], ["Dahi Puri — 8 pc", null]
+    ]
+  };
+
+  const navEl = document.getElementById('menuNav');
+  const contentEl = document.getElementById('menuContent');
+  const categories = Object.keys(menu);
+
+  categories.forEach((cat, i) => {
+    const b = document.createElement('button');
+    b.textContent = cat;
+    if(i===0) b.classList.add('active');
+    b.addEventListener('click', () => {
+      document.getElementById('cat-'+i).scrollIntoView({behavior:'smooth', block:'start'});
+      [...navEl.children].forEach(c=>c.classList.remove('active'));
+      b.classList.add('active');
+    });
+    navEl.appendChild(b);
+  });
+
+  categories.forEach((cat, i) => {
+    const section = document.createElement('div');
+    section.className = 'menu-category';
+    section.id = 'cat-'+i;
+    const h3 = document.createElement('h3');
+    h3.textContent = cat;
+    section.appendChild(h3);
+    const grid = document.createElement('div');
+    grid.className = 'dish-grid';
+    menu[cat].forEach(([name, price]) => {
+      const ticket = document.createElement('div');
+      ticket.className = 'dish-ticket';
+      ticket.innerHTML = `<span class="dish-name">${name}</span><span class="dish-price ${price ? '' : 'tbd'} mono">${price ? price : 'ask staff'}</span>`;
+      grid.appendChild(ticket);
+    });
+    section.appendChild(grid);
+    contentEl.appendChild(section);
+  });
+
+  // Day pills
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const dayPillsEl = document.getElementById('dayPills');
+  const todayIdx = (new Date().getDay() + 6) % 7; // Mon=0
+  days.forEach((d,i) => {
+    const p = document.createElement('div');
+    p.className = 'day-pill' + (i===todayIdx ? ' today' : '');
+    p.textContent = d;
+    dayPillsEl.appendChild(p);
+  });
+
+  // Popular times bars (illustrative curve, peak marked near 1pm per listing)
+  const heights = [20,35,55,70,58,42,50,65,80,60,38,22];
+  const labelsIdx = [0,2,4,6,8,10]; // corresponds to 9a,11a,1p,3p,5p,7p,9p roughly — just visual
+  const barsEl = document.getElementById('barsChart');
+  const peakIndex = 3; // ~1pm mentioned as reference point in listing
+  heights.forEach((h,i) => {
+    const bar = document.createElement('div');
+    bar.className = 'bar' + (i===peakIndex ? ' peak':'');
+    bar.style.height = h + '%';
+    barsEl.appendChild(bar);
+  });
+</script>
+
+</body>
+</html>
